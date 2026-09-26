@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #0066cc;
+  --color-primary-focus: #0071e3;
+  --color-primary-on-dark: #2997ff;
+  --color-ink: #1d1d1f;
+  --color-body: #1d1d1f;
+  --color-ink-muted-80: #333333;
+  --color-ink-muted-48: #7a7a7a;
+  --color-divider-soft: #f0f0f0;
+  --color-hairline: #e0e0e0;
+  --color-canvas: #ffffff;
+  --color-canvas-parchment: #f5f5f7;
+  --color-surface-pearl: #fafafc;
+  --color-surface-tile-1: #272729;
+  --color-surface-tile-2: #2a2a2c;
+  --color-surface-tile-3: #252527;
+  --color-surface-black: #000000;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --tracking-apple-tight: -0.022em;
+  --tracking-apple-display: -0.015em;
+  --tracking-apple-subtle: -0.008em;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background-color: var(--color-canvas);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark {
+    color: #f5f5f7;
+    background-color: #121214;
+    color-scheme: dark;
+  }
+
+  body {
+    font-size: 17px;
+    line-height: 1.47;
+    letter-spacing: -0.022em;
+  }
+}
+
+/* Custom utility classes reflecting DESIGN.md specifications */
+.apple-tight-title {
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.apple-body {
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+}
+
+.apple-btn-active {
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.15s ease;
+}
+
+.apple-btn-active:active {
+  transform: scale(0.96);
+}
+
+.apple-card-shadow {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+html.dark .apple-card-shadow {
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.4), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Subtle line scrollbars */
+textarea::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 9999px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #86868b;
+}
+
+html.dark textarea::-webkit-scrollbar-thumb {
+  background: #3a3a3c;
+}
+html.dark textarea::-webkit-scrollbar-thumb:hover {
+  background: #636366;
+}

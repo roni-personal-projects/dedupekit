@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const detailedFeatures = [
+  {
+    id: "instant-engine",
+    badge: "Performance",
+    title: "Zero-Latency Client-Side Engine",
+    description: "DeDupe Kit processes lines using an asynchronous Web Worker pipeline running locally on your device. By offloading parsing, key extraction, hashing, and sorting to a background execution thread, the user interface remains completely responsive at 60fps—even when handling lists exceeding 100,000 items.",
+    bullets: [
+      "Processes 50,000+ lines in under 200 milliseconds",
+      "Asynchronous Web Worker isolates execution from UI rendering",
+      "Automatic debounce ensures typing feels instantaneous",
+      "Manual run button available for ultra-large multi-megabyte payloads"
+    ]
+  },
+  {
+    id: "case-matching",
+    badge: "Precision",
+    title: "Smart Case Matching with Casing Preservation",
+    description: "Legacy tools treat case-insensitive matching as a blunt sledgehammer: they convert all output lines to lowercase, destroying proper names, URLs, acronyms, and formatting. DeDupe Kit uses hash key normalization to identify duplicates while preserving the pristine casing of the first occurrence in your final output.",
+    bullets: [
+      "Case-Sensitive: Treats 'Apple' and 'apple' as distinct entries",
+      "Case-Insensitive: Recognizes identical words regardless of capitalization",
+      "Preserves Original Casing: Keeps 'Apple' rather than forcing 'apple'",
+      "Optional lowercase normalization when uniform casing is requested"
+    ]
+  },
+  {
+    id: "spreadsheet-guard",
+    badge: "Integrations",
+    title: "Excel, Google Sheets & TSV Delimiter Guard",
+    description: "When you select and copy a column or table from Microsoft Excel or Google Sheets, your clipboard contains tab-delimited values (\\t). Older tools replace tabs with spaces or collapse them, permanently corrupting your spreadsheet formatting. DeDupe Kit preserves tabs verbatim and even allows column-level deduplication.",
+    bullets: [
+      "Paste directly from Google Sheets or Excel with Ctrl+V / ⌘+V",
+      "Full preservation of Tab (\\t), Comma (,), and Semicolon (;) delimiters",
+      "Column-level deduplication: deduplicate by Column 1, 2, 3, etc.",
+      "Paste cleaned data directly back into your sheet with intact grid alignment"
+    ]
+  },
+  {
+    id: "sorting-suite",
+    badge: "Organization",
+    title: "Multi-Algorithm Sorting Suite",
+    description: "Lists often require specific organizational structures after redundant entries are removed. DeDupe Kit offers six sorting modes beyond basic alphabetical ordering.",
+    bullets: [
+      "Preserve Original Order: Retains the first appearance order",
+      "Alphabetical (A → Z) and Reverse Alphabetical (Z → A)",
+      "Natural Sort: Correctly orders numbers (e.g. 'Item 2' before 'Item 10')",
+      "Line Length Sort: Sorts lines by shortest or longest character count",
+      "Reverse Order: Inverts the original sequence"
+    ]
+  },
+  {
+    id: "audit-mode",
+    badge: "Data Auditing",
+    title: "Duplicates-Only & Unique-Once Audit Modes",
+    description: "Often, the goal is not just to delete duplicates, but to understand what was repeated in the first place. DeDupe Kit introduces an Audit Mode that extracts only the lines that appeared two or more times, or isolates items that had zero repeats.",
+    bullets: [
+      "Show Duplicates Only: Instantly find repeated customer records or error logs",
+      "Unique Once: Isolate items that appeared exactly once in the entire dataset",
+      "Frequency Counts: Appends or prepends count badges (e.g. 'item [4x]')",
+      "One-click export of audit lists for reporting and analysis"
+    ]
+  },
+  {
+    id: "whitespace-blank",
+    badge: "Sanitization",
+    title: "Whitespace Trimming & Blank Line Controls",
+    description: "Dirty lists frequently contain hidden trailing spaces, leading tabs, or random empty lines. DeDupe Kit gives you granular control over how whitespace is treated before and after matching.",
+    bullets: [
+      "Trim leading and trailing whitespace simultaneously",
+      "Trim leading only or trailing only",
+      "Remove all blank lines, preserve them, or collapse consecutive blanks to one",
+      "Safe handling of indentation in code snippets and scripts"
+    ]
+  }
+];
+---
+
+<Layout
+  title="Features — Online Duplicate Line Remover Tool | DeDupe Kit"
+  description="Explore the advanced capabilities of our duplicate line remover tool: instant Web Worker processing, Excel TSV protection, case matching, and sorting suite."
+  canonical="https://dedupekit.pages.dev/features"
+  keywords="duplicate line remover tool, remove duplicate lines, online duplicate line remover, remove duplicates, text deduplicator, deduplicate list"
+>
+  <Header currentPath="/features" />
+
+  <main class="flex-1">
+    <!-- Hero Banner -->
+    <section class="py-16 sm:py-24 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[1000px] mx-auto px-4 sm:px-6 text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0066cc]/10 text-[#0066cc] dark:text-[#2997ff] text-xs font-semibold uppercase tracking-wider mb-4">
+          Architectural Overview
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-6">
+          Engineered for speed, safety, and precision.
+        </h1>
+        <p class="text-lg sm:text-xl text-[#7a7a7a] dark:text-[#a1a1a6] max-w-2xl mx-auto leading-relaxed">
+          Discover how DeDupe Kit protects your data integrity, accelerates list sanitization, and respects your privacy.
+        </p>
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-colors shadow-xs">
+            Open Deduplication Tool
+          </a>
+          <a href="/compare" class="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-[#f5f5f7] dark:bg-[#252528] text-[#1d1d1f] dark:text-[#f5f5f7] font-medium hover:bg-[#e0e0e0] dark:hover:bg-[#333336] transition-colors">
+            Compare with Competitors
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deep-Dive Feature Sections -->
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#18181b] transition-colors">
+      <div class="max-w-[1100px] mx-auto px-4 sm:px-6 space-y-12">
+        {detailedFeatures.map((feat, index) => (
+          <div id={feat.id} class="bg-white dark:bg-[#1c1c1e] rounded-3xl p-8 sm:p-10 border border-[#e0e0e0] dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.03)] scroll-mt-24 transition-colors">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#0066cc]/10 text-[#0066cc] dark:text-[#2997ff]">
+                {feat.badge}
+              </span>
+              <span class="text-xs text-[#7a7a7a] dark:text-[#a1a1a6] font-mono">0{index + 1}</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">
+              {feat.title}
+            </h2>
+            <p class="text-base sm:text-lg text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-6">
+              {feat.description}
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+              {feat.bullets.map(bullet => (
+                <div class="flex items-start gap-2 text-sm text-[#1d1d1f] dark:text-[#f5f5f7]">
+                  <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Bottom CTA Bar -->
+    <section class="py-16 bg-white dark:bg-[#121214] border-t border-[#e0e0e0] dark:border-white/10 text-center transition-colors">
+      <div class="max-w-xl mx-auto px-4 sm:px-6">
+        <h3 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">Ready to clean your text list?</h3>
+        <p class="text-[#7a7a7a] dark:text-[#a1a1a6] mb-6 text-sm sm:text-base">
+          Try DeDupe Kit right now in your browser. No sign-up, no downloads, completely free.
+        </p>
+        <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-all shadow-md">
+          Launch DeDupe Kit
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

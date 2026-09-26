@@ -1,0 +1,746 @@
+---
+// Main interactive Deduplication Studio component
+---
+
+<section id="tool" class="pt-8 pb-16 px-4 sm:px-6 max-w-[1280px] mx-auto w-full">
+  <!-- Hero Intro -->
+  <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0066cc]/10 dark:bg-[#0066cc]/20 text-[#0066cc] dark:text-[#2997ff] text-[13px] font-medium mb-4">
+      <span class="w-2 h-2 rounded-full bg-[#0066cc] dark:bg-[#2997ff] animate-pulse"></span>
+      <span>100% Client-Side • Zero Data Uploaded</span>
+    </div>
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-white mb-4">
+      Clean lists. Zero duplicates.
+    </h1>
+    <p class="text-lg sm:text-xl text-[#7a7a7a] dark:text-[#a1a1a6] font-normal leading-relaxed max-w-2xl mx-auto">
+      The privacy-first deduplication engine for developers, marketers, and data analysts. Fast, accurate, and completely runs inside your browser.
+    </p>
+  </div>
+
+  <!-- Studio Surface Card -->
+  <div class="bg-white dark:bg-[#1c1c1e] rounded-2xl sm:rounded-3xl border border-[#e0e0e0] dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.4)] overflow-hidden transition-colors duration-200">
+    
+    <!-- Controls Bar -->
+    <div class="border-b border-[#e0e0e0] dark:border-white/10 bg-[#fafafc] dark:bg-[#252528] p-4 sm:p-5 transition-colors">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Quick Preset Samples -->
+        <div class="flex items-center gap-2 text-xs">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium uppercase tracking-wider text-[11px]">Load Sample:</span>
+          <button type="button" data-sample="emails" class="px-2.5 py-1 rounded-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 text-[#1d1d1f] dark:text-[#f5f5f7] hover:border-[#0066cc] hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-all cursor-pointer">
+            Emails
+          </button>
+          <button type="button" data-sample="spreadsheet" class="px-2.5 py-1 rounded-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 text-[#1d1d1f] dark:text-[#f5f5f7] hover:border-[#0066cc] hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-all cursor-pointer">
+            Excel TSV
+          </button>
+          <button type="button" data-sample="urls" class="px-2.5 py-1 rounded-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 text-[#1d1d1f] dark:text-[#f5f5f7] hover:border-[#0066cc] hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-all cursor-pointer">
+            URLs
+          </button>
+          <button type="button" data-sample="inventory" class="hidden sm:inline-block px-2.5 py-1 rounded-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 text-[#1d1d1f] dark:text-[#f5f5f7] hover:border-[#0066cc] hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-all cursor-pointer">
+            SKUs / Mixed
+          </button>
+        </div>
+
+        <!-- Mode & Delimiter Toggles Trigger -->
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-2 cursor-pointer select-none text-xs text-[#1d1d1f] dark:text-[#f5f5f7]">
+            <input type="checkbox" id="live-mode-toggle" checked class="w-3.5 h-3.5 accent-[#0066cc] rounded cursor-pointer" />
+            <span class="font-medium">Live Auto-Dedupe</span>
+          </label>
+          <button type="button" id="toggle-advanced-opts" class="text-xs text-[#0066cc] dark:text-[#2997ff] hover:underline flex items-center gap-1 cursor-pointer font-medium">
+            <span>More Options</span>
+            <svg id="opts-chevron" class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Options Ribbon -->
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+        
+        <!-- Case Sensitivity -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Matching Case</span>
+          <div class="inline-flex rounded-lg bg-[#f0f0f0] dark:bg-[#2c2c2e] p-0.5" role="group">
+            <button type="button" data-case="insensitive" class="opt-btn flex-1 py-1.5 px-3 rounded-md text-center font-medium bg-white dark:bg-[#3a3a3c] text-[#1d1d1f] dark:text-[#f5f5f7] shadow-xs cursor-pointer">
+              Case-Insensitive
+            </button>
+            <button type="button" data-case="sensitive" class="opt-btn flex-1 py-1.5 px-3 rounded-md text-center font-medium text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-[#1d1d1f] dark:hover:text-[#ffffff] cursor-pointer">
+              Case-Sensitive
+            </button>
+          </div>
+        </div>
+
+        <!-- Whitespace Handling -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Whitespace</span>
+          <select id="opt-whitespace" class="w-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+            <option value="both" selected>Trim Leading & Trailing</option>
+            <option value="start">Trim Leading Only</option>
+            <option value="end">Trim Trailing Only</option>
+            <option value="none">Preserve Exact Whitespace</option>
+          </select>
+        </div>
+
+        <!-- Blank Lines -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Blank Lines</span>
+          <select id="opt-blanklines" class="w-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+            <option value="remove" selected>Remove All Blank Lines</option>
+            <option value="preserve">Preserve Blank Lines</option>
+            <option value="single">Collapse to Single Blank Line</option>
+          </select>
+        </div>
+
+        <!-- Sort Order -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Order & Sorting</span>
+          <select id="opt-sort" class="w-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+            <option value="original" selected>Preserve Original Order</option>
+            <option value="az">Alphabetical (A → Z)</option>
+            <option value="za">Reverse Alphabetical (Z → A)</option>
+            <option value="natural">Natural Sort (1, 2, 10)</option>
+            <option value="length-asc">Shortest Lines First</option>
+            <option value="length-desc">Longest Lines First</option>
+            <option value="reverse">Reverse Original Order</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Advanced Drawer (Filter Mode + Excel/TSV Delimiter Detection) -->
+      <div id="advanced-opts-panel" class="hidden mt-4 pt-4 border-t border-[#e0e0e0] dark:border-white/10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+        
+        <!-- Output Filter Mode -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Output Filter Mode</span>
+          <select id="opt-filter-mode" class="w-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+            <option value="unique" selected>Deduplicate (Keep 1st Occurrence)</option>
+            <option value="duplicates-only">Show Duplicates Only (Audit Mode)</option>
+            <option value="unique-once">Unique Once Only (No Repeated Items)</option>
+            <option value="frequency">Count Frequency (e.g. Item [3x])</option>
+          </select>
+          <p class="text-[11px] text-[#7a7a7a] dark:text-[#a1a1a6]">"Duplicates Only" extracts lines that occurred 2+ times.</p>
+        </div>
+
+        <!-- Excel / TSV Delimiter Column Deduction -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Tab / CSV Delimiter Detection</span>
+          <div class="flex items-center gap-2">
+            <select id="opt-delimiter" class="flex-1 bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+              <option value="none" selected>Whole Line (Ignore Delimiters)</option>
+              <option value="auto">Auto-Detect (Tab or Comma)</option>
+              <option value="&#9;">Tab Delimited (\t - Excel/Sheets)</option>
+              <option value=",">Comma Delimited (,)</option>
+              <option value=";">Semicolon Delimited (;)</option>
+              <option value="|">Pipe Delimited (|)</option>
+            </select>
+            <select id="opt-column-index" class="w-28 bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-[#1d1d1f] dark:text-[#f5f5f7] focus:outline-none focus:border-[#0066cc] cursor-pointer">
+              <option value="0">By Col 1</option>
+              <option value="1">By Col 2</option>
+              <option value="2">By Col 3</option>
+              <option value="3">By Col 4</option>
+            </select>
+          </div>
+          <p class="text-[11px] text-[#7a7a7a] dark:text-[#a1a1a6]">Deduplicate records based on a specific spreadsheet column.</p>
+        </div>
+
+        <!-- Casing Preservation -->
+        <div class="flex flex-col gap-1.5">
+          <span class="text-[#7a7a7a] dark:text-[#a1a1a6] font-medium text-[11px] uppercase tracking-wider">Case Preservation</span>
+          <label class="flex items-center gap-2 cursor-pointer mt-1 text-[#1d1d1f] dark:text-[#f5f5f7]">
+            <input type="checkbox" id="opt-preserve-casing" checked class="w-3.5 h-3.5 accent-[#0066cc] rounded cursor-pointer" />
+            <span>Preserve original casing on match</span>
+          </label>
+          <p class="text-[11px] text-[#7a7a7a] dark:text-[#a1a1a6]">Unlike legacy tools, matches case-insensitively without forcing lowercase.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Dual Editor Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-[#e0e0e0] dark:divide-white/10">
+      
+      <!-- Input Panel -->
+      <div class="flex flex-col bg-white dark:bg-[#1c1c1e] p-4 sm:p-5 relative group" id="drop-zone">
+        
+        <!-- Input Header Toolbar -->
+        <div class="flex items-center justify-between pb-3 border-b border-[#f0f0f0] dark:border-white/10 mb-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] text-sm">Input List</span>
+            <span id="input-line-badge" class="px-2 py-0.5 rounded-full bg-[#f0f0f0] dark:bg-white/10 text-[#7a7a7a] dark:text-[#a1a1a6] font-mono text-[11px]">0 lines</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Hidden File Input -->
+            <input type="file" id="file-uploader" accept=".txt,.csv,.tsv,.log,.json" class="hidden" />
+            <button type="button" id="upload-btn" class="flex items-center gap-1 text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-[#0066cc] dark:hover:text-[#2997ff] px-2 py-1 rounded transition-colors cursor-pointer" title="Import TXT, CSV, or TSV file">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <span>Upload</span>
+            </button>
+            <button type="button" id="clear-btn" class="flex items-center gap-1 text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-red-500 px-2 py-1 rounded transition-colors cursor-pointer" title="Clear input text">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              <span>Clear</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Input Textarea -->
+        <div class="relative flex-1 min-h-[340px] sm:min-h-[420px]">
+          <textarea
+            id="input-text"
+            rows="16"
+            class="w-full h-full p-3 font-mono text-sm leading-relaxed text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] dark:placeholder:text-[#636366] border-0 focus:ring-0 focus:outline-none resize-none bg-transparent"
+            placeholder="Paste your text, list, or spreadsheet columns here (Ctrl+V)...&#10;Or drag and drop a .txt, .csv, or .tsv file directly into this box."
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+          ></textarea>
+
+          <!-- Drag and drop overlay -->
+          <div id="drag-overlay" class="hidden absolute inset-0 bg-[#0066cc]/10 dark:bg-[#0066cc]/20 border-2 border-dashed border-[#0066cc] rounded-xl flex flex-col items-center justify-center pointer-events-none backdrop-blur-xs">
+            <svg class="w-10 h-10 text-[#0066cc] dark:text-[#2997ff] mb-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            <p class="text-sm font-semibold text-[#0066cc] dark:text-[#2997ff]">Drop file here to load</p>
+          </div>
+        </div>
+
+        <!-- Input Footer Info -->
+        <div class="pt-3 border-t border-[#f0f0f0] dark:border-white/10 flex items-center justify-between text-[11px] text-[#7a7a7a] dark:text-[#a1a1a6]">
+          <span id="input-char-count">0 characters</span>
+          <span class="hidden sm:inline">Pasting from Excel / Sheets supported</span>
+        </div>
+
+      </div>
+
+      <!-- Output Panel -->
+      <div class="flex flex-col bg-[#fafafc] dark:bg-[#18181b] p-4 sm:p-5 relative">
+        
+        <!-- Output Header Toolbar -->
+        <div class="flex items-center justify-between pb-3 border-b border-[#e0e0e0] dark:border-white/10 mb-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] text-sm">Cleaned Results</span>
+            <span id="output-line-badge" class="px-2 py-0.5 rounded-full bg-[#0066cc]/10 text-[#0066cc] dark:text-[#2997ff] font-mono text-[11px] font-medium">0 unique</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Swap to Input Button -->
+            <button type="button" id="swap-btn" class="flex items-center gap-1 text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-[#0066cc] dark:hover:text-[#2997ff] px-2 py-1 rounded transition-colors cursor-pointer" title="Swap cleaned output back into input">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+              <span>Swap</span>
+            </button>
+
+            <!-- Download Dropdown / Buttons -->
+            <button type="button" id="download-txt-btn" class="flex items-center gap-1 text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-[#0066cc] dark:hover:text-[#2997ff] px-2 py-1 rounded transition-colors cursor-pointer" title="Download as .txt file">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>.txt</span>
+            </button>
+
+            <button type="button" id="download-csv-btn" class="hidden sm:flex items-center gap-1 text-[#7a7a7a] dark:text-[#a1a1a6] hover:text-[#0066cc] dark:hover:text-[#2997ff] px-2 py-1 rounded transition-colors cursor-pointer" title="Download as .csv file">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>.csv</span>
+            </button>
+
+            <!-- Primary 1-Click Copy Button -->
+            <button type="button" id="copy-btn" class="apple-btn-active inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-all cursor-pointer shadow-xs">
+              <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span id="copy-text">Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Textarea -->
+        <div class="relative flex-1 min-h-[340px] sm:min-h-[420px]">
+          <textarea
+            id="output-text"
+            rows="16"
+            readonly
+            class="w-full h-full p-3 font-mono text-sm leading-relaxed text-[#1d1d1f] dark:text-[#f5f5f7] placeholder:text-[#86868b] dark:placeholder:text-[#636366] border-0 focus:ring-0 focus:outline-none resize-none bg-transparent cursor-text"
+            placeholder="Unique, cleaned lines will appear here instantly..."
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- Output Footer Info -->
+        <div class="pt-3 border-t border-[#e0e0e0] dark:border-white/10 flex items-center justify-between text-[11px] text-[#7a7a7a] dark:text-[#a1a1a6]">
+          <span id="output-char-count">0 characters</span>
+          <span id="proc-time-badge" class="font-mono">Ready</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Live Performance & Analytics Bar -->
+    <div class="border-t border-[#e0e0e0] dark:border-white/10 bg-[#f5f5f7] dark:bg-[#151518] px-4 py-3 sm:px-6 sm:py-4 transition-colors">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Metric Counters -->
+        <div class="flex flex-wrap items-center gap-4 sm:gap-8 text-xs">
+          <div>
+            <span class="text-[#7a7a7a] dark:text-[#a1a1a6] block text-[11px]">Original Lines</span>
+            <span id="stat-total" class="font-semibold text-sm sm:text-base text-[#1d1d1f] dark:text-[#f5f5f7]">0</span>
+          </div>
+          <div>
+            <span class="text-[#7a7a7a] dark:text-[#a1a1a6] block text-[11px]">Unique Lines</span>
+            <span id="stat-unique" class="font-semibold text-sm sm:text-base text-[#0066cc] dark:text-[#2997ff]">0</span>
+          </div>
+          <div>
+            <span class="text-[#7a7a7a] dark:text-[#a1a1a6] block text-[11px]">Duplicates Removed</span>
+            <span id="stat-removed" class="font-semibold text-sm sm:text-base text-[#1d1d1f] dark:text-[#f5f5f7]">0</span>
+          </div>
+          <div>
+            <span class="text-[#7a7a7a] dark:text-[#a1a1a6] block text-[11px]">Reduction</span>
+            <span id="stat-percent" class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
+              0%
+            </span>
+          </div>
+        </div>
+
+        <!-- Primary Action Trigger for Large Lists / Manual Run -->
+        <div class="flex items-center gap-3">
+          <button type="button" id="manual-run-btn" class="apple-btn-active inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1d1d1f] dark:bg-white text-white dark:text-[#1d1d1f] text-xs font-semibold hover:bg-black dark:hover:bg-[#e0e0e0] transition-all cursor-pointer shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Deduplicate Now</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Notification Pill -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1d1d1f] text-white text-xs shadow-xl font-medium">
+    <svg id="toast-icon" class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="toast-msg">Copied to clipboard</span>
+  </div>
+</section>
+
+<!-- Client Script: Deduplication Engine, Web Worker & UI Bindings -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Elements
+    const inputText = document.getElementById('input-text');
+    const outputText = document.getElementById('output-text');
+    const inputLineBadge = document.getElementById('input-line-badge');
+    const outputLineBadge = document.getElementById('output-line-badge');
+    const inputCharCount = document.getElementById('input-char-count');
+    const outputCharCount = document.getElementById('output-char-count');
+    const statTotal = document.getElementById('stat-total');
+    const statUnique = document.getElementById('stat-unique');
+    const statRemoved = document.getElementById('stat-removed');
+    const statPercent = document.getElementById('stat-percent');
+    const procTimeBadge = document.getElementById('proc-time-badge');
+    
+    // Controls
+    const liveModeToggle = document.getElementById('live-mode-toggle');
+    const manualRunBtn = document.getElementById('manual-run-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const copyText = document.getElementById('copy-text');
+    const copyIcon = document.getElementById('copy-icon');
+    const swapBtn = document.getElementById('swap-btn');
+    const downloadTxtBtn = document.getElementById('download-txt-btn');
+    const downloadCsvBtn = document.getElementById('download-csv-btn');
+    const uploadBtn = document.getElementById('upload-btn');
+    const fileUploader = document.getElementById('file-uploader');
+    const dropZone = document.getElementById('drop-zone');
+    const dragOverlay = document.getElementById('drag-overlay');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+
+    // Advanced Drawer
+    const toggleAdvancedOpts = document.getElementById('toggle-advanced-opts');
+    const advancedOptsPanel = document.getElementById('advanced-opts-panel');
+    const optsChevron = document.getElementById('opts-chevron');
+
+    // Options
+    let caseSensitive = false;
+    let preserveCasing = true;
+    let trimWhitespace = 'both';
+    let blankLines = 'remove';
+    let sortOrder = 'original';
+    let filterMode = 'unique';
+    let columnDelimiter = 'none';
+    let columnIndex = 0;
+
+    // Web Worker Initialization
+    let worker = null;
+    try {
+      worker = new Worker('/dedupe-worker.js');
+      worker.onmessage = function (e) {
+        const { output, stats } = e.data;
+        outputText.value = output;
+        updateUI(stats);
+      };
+    } catch (err) {
+      console.warn('Worker initialization fallback to main thread', err);
+    }
+
+    // Fallback sync deduplication if worker unavailable
+    function runSync(payload) {
+      const { text } = payload;
+      if (!text) {
+        outputText.value = '';
+        updateUI({ totalLines: 0, uniqueLines: 0, duplicatesRemoved: 0, reductionPercent: 0, charCount: 0, durationMs: 0 });
+        return;
+      }
+
+      const t0 = performance.now();
+      const rawLines = text.split(/\r\n|\r|\n/);
+      const total = rawLines.length;
+      const seen = new Map();
+      const list = [];
+
+      for (let i = 0; i < total; i++) {
+        let line = rawLines[i];
+        if (trimWhitespace === 'both') line = line.trim();
+        else if (trimWhitespace === 'start') line = line.trimStart();
+        else if (trimWhitespace === 'end') line = line.trimEnd();
+
+        if (blankLines === 'remove' && line.length === 0) continue;
+
+        let key = caseSensitive ? line : line.toLowerCase();
+        if (columnDelimiter !== 'none') {
+          let sep = columnDelimiter === 'auto' ? (line.includes('\t') ? '\t' : ',') : columnDelimiter;
+          const parts = line.split(sep);
+          if (parts[columnIndex] !== undefined) {
+            key = caseSensitive ? parts[columnIndex] : parts[columnIndex].toLowerCase();
+          }
+        }
+
+        if (seen.has(key)) {
+          seen.get(key).count++;
+        } else {
+          const entry = { text: line, count: 1 };
+          seen.set(key, entry);
+          list.push(entry);
+        }
+      }
+
+      let filtered = [];
+      if (filterMode === 'unique') filtered = list.map(e => e.text);
+      else if (filterMode === 'duplicates-only') filtered = list.filter(e => e.count > 1).map(e => e.text);
+      else if (filterMode === 'unique-once') filtered = list.filter(e => e.count === 1).map(e => e.text);
+      else if (filterMode === 'frequency') filtered = list.map(e => `${e.text} [${e.count}x]`);
+
+      if (sortOrder === 'az') filtered.sort((a,b) => a.localeCompare(b));
+      else if (sortOrder === 'za') filtered.sort((a,b) => b.localeCompare(a));
+      else if (sortOrder === 'natural') filtered.sort((a,b) => a.localeCompare(b, undefined, { numeric: true }));
+      else if (sortOrder === 'length-asc') filtered.sort((a,b) => a.length - b.length || a.localeCompare(b));
+      else if (sortOrder === 'length-desc') filtered.sort((a,b) => b.length - a.length || a.localeCompare(b));
+      else if (sortOrder === 'reverse') filtered.reverse();
+
+      const out = filtered.join('\n');
+      outputText.value = out;
+      const duration = Math.round(performance.now() - t0);
+      const rm = Math.max(0, total - filtered.length);
+      updateUI({
+        totalLines: total,
+        uniqueLines: filtered.length,
+        duplicatesRemoved: rm,
+        reductionPercent: total > 0 ? Math.round((rm / total) * 100) : 0,
+        charCount: out.length,
+        durationMs: duration
+      });
+    }
+
+    function triggerDeduplication() {
+      const text = inputText.value;
+      const lines = text ? text.split(/\r\n|\r|\n/) : [];
+      inputLineBadge.textContent = `${lines.length.toLocaleString()} lines`;
+      inputCharCount.textContent = `${text.length.toLocaleString()} characters`;
+
+      if (!text || text.trim().length === 0) {
+        outputText.value = '';
+        updateUI({ totalLines: 0, uniqueLines: 0, duplicatesRemoved: 0, reductionPercent: 0, charCount: 0, durationMs: 0 });
+        return;
+      }
+
+      const payload = {
+        text: text,
+        caseSensitive: caseSensitive,
+        preserveCasing: preserveCasing,
+        trimWhitespace: trimWhitespace,
+        blankLines: blankLines,
+        sortOrder: sortOrder,
+        filterMode: filterMode,
+        columnDelimiter: columnDelimiter,
+        columnIndex: columnIndex
+      };
+
+      if (worker) {
+        procTimeBadge.textContent = 'Processing...';
+        worker.postMessage(payload);
+      } else {
+        runSync(payload);
+      }
+    }
+
+    function updateUI(stats) {
+      statTotal.textContent = stats.totalLines.toLocaleString();
+      statUnique.textContent = stats.uniqueLines.toLocaleString();
+      statRemoved.textContent = stats.duplicatesRemoved.toLocaleString();
+      statPercent.textContent = `-${stats.reductionPercent}%`;
+      outputLineBadge.textContent = `${stats.uniqueLines.toLocaleString()} unique`;
+      outputCharCount.textContent = `${stats.charCount.toLocaleString()} characters`;
+      procTimeBadge.textContent = `${stats.durationMs}ms`;
+    }
+
+    // Debounce for live typing
+    let debounceTimer = null;
+    inputText.addEventListener('input', () => {
+      if (liveModeToggle.checked) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(triggerDeduplication, 120);
+      } else {
+        const text = inputText.value;
+        const count = text ? text.split(/\r\n|\r|\n/).length : 0;
+        inputLineBadge.textContent = `${count.toLocaleString()} lines`;
+        inputCharCount.textContent = `${text.length.toLocaleString()} characters`;
+      }
+    });
+
+    manualRunBtn.addEventListener('click', triggerDeduplication);
+
+    // Keyboard shortcut: Ctrl+Enter or Cmd+Enter to run
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        triggerDeduplication();
+        showToast('Deduplicated via shortcut');
+      }
+    });
+
+    // Case Sensitivity Buttons
+    document.querySelectorAll('[data-case]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-case]').forEach(b => {
+          b.classList.remove('bg-white', 'dark:bg-[#3a3a3c]', 'text-[#1d1d1f]', 'dark:text-[#f5f5f7]', 'shadow-xs');
+          b.classList.add('text-[#7a7a7a]', 'dark:text-[#a1a1a6]');
+        });
+        btn.classList.add('bg-white', 'dark:bg-[#3a3a3c]', 'text-[#1d1d1f]', 'dark:text-[#f5f5f7]', 'shadow-xs');
+        btn.classList.remove('text-[#7a7a7a]', 'dark:text-[#a1a1a6]');
+
+        caseSensitive = btn.getAttribute('data-case') === 'sensitive';
+        if (liveModeToggle.checked) triggerDeduplication();
+      });
+    });
+
+    // Dropdowns
+    document.getElementById('opt-whitespace').addEventListener('change', (e) => {
+      trimWhitespace = e.target.value;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-blanklines').addEventListener('change', (e) => {
+      blankLines = e.target.value;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-sort').addEventListener('change', (e) => {
+      sortOrder = e.target.value;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-filter-mode').addEventListener('change', (e) => {
+      filterMode = e.target.value;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-delimiter').addEventListener('change', (e) => {
+      columnDelimiter = e.target.value;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-column-index').addEventListener('change', (e) => {
+      columnIndex = parseInt(e.target.value, 10);
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    document.getElementById('opt-preserve-casing').addEventListener('change', (e) => {
+      preserveCasing = e.target.checked;
+      if (liveModeToggle.checked) triggerDeduplication();
+    });
+
+    // Toggle Advanced Drawer
+    toggleAdvancedOpts.addEventListener('click', () => {
+      const isHidden = advancedOptsPanel.classList.toggle('hidden');
+      optsChevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+
+    // 1-Click Copy
+    copyBtn.addEventListener('click', async () => {
+      const text = outputText.value;
+      if (!text) {
+        showToast('Nothing to copy yet');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+        copyText.textContent = 'Copied!';
+        copyBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+        copyBtn.classList.remove('bg-[#0066cc]', 'hover:bg-[#0071e3]');
+        showToast(`Copied ${statUnique.textContent} unique lines`);
+
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+          copyBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+          copyBtn.classList.add('bg-[#0066cc]', 'hover:bg-[#0071e3]');
+        }, 1800);
+      } catch (err) {
+        outputText.select();
+        document.execCommand('copy');
+        showToast('Copied to clipboard');
+      }
+    });
+
+    // Clear
+    clearBtn.addEventListener('click', () => {
+      if (inputText.value.length > 0) {
+        inputText.value = '';
+        outputText.value = '';
+        updateUI({ totalLines: 0, uniqueLines: 0, duplicatesRemoved: 0, reductionPercent: 0, charCount: 0, durationMs: 0 });
+        inputLineBadge.textContent = '0 lines';
+        inputCharCount.textContent = '0 characters';
+        showToast('Cleared');
+      }
+    });
+
+    // Swap Output back to Input
+    swapBtn.addEventListener('click', () => {
+      const currentOutput = outputText.value;
+      if (currentOutput) {
+        inputText.value = currentOutput;
+        triggerDeduplication();
+        showToast('Swapped output into input');
+      }
+    });
+
+    // Download TXT
+    downloadTxtBtn.addEventListener('click', () => {
+      const text = outputText.value;
+      if (!text) return showToast('Output is empty');
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      downloadBlob(blob, 'deduped-list.txt');
+      showToast('Downloaded .txt file');
+    });
+
+    // Download CSV
+    downloadCsvBtn.addEventListener('click', () => {
+      const text = outputText.value;
+      if (!text) return showToast('Output is empty');
+      const blob = new Blob([text], { type: 'text/csv;charset=utf-8' });
+      downloadBlob(blob, 'deduped-list.csv');
+      showToast('Downloaded .csv file');
+    });
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // File Upload via button
+    uploadBtn.addEventListener('click', () => fileUploader.click());
+    fileUploader.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) readFile(file);
+      fileUploader.value = '';
+    });
+
+    // Drag and Drop
+    ['dragenter', 'dragover'].forEach(name => {
+      dropZone.addEventListener(name, (e) => {
+        e.preventDefault();
+        dragOverlay.classList.remove('hidden');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+      dropZone.addEventListener(name, (e) => {
+        e.preventDefault();
+        dragOverlay.classList.add('hidden');
+      });
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file) readFile(file);
+    });
+
+    function readFile(file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        inputText.value = evt.target.result;
+        triggerDeduplication();
+        showToast(`Loaded ${file.name} (${Math.round(file.size / 1024)} KB)`);
+      };
+      reader.readAsText(file);
+    }
+
+    // Sample Presets
+    const samplePresets = {
+      emails: `alex.morgan@company.io\nsarah.chen@work.org\nALEX.MORGAN@company.io\nmike.ross@legal.com\nsarah.chen@work.org\ncontact@dedupekit.pages.dev\nmike.ross@legal.com\nhello@apple.com\nsarah.chen@work.org`,
+      spreadsheet: `ID\tProduct\tCategory\n101\tMacBook Pro 16\tLaptops\n102\tMac Studio M2\tDesktops\n101\tMacBook Pro 16\tLaptops\n103\tStudio Display\tMonitors\n104\tMagic Mouse\tAccessories\n102\tMac Studio M2\tDesktops`,
+      urls: `https://dedupekit.pages.dev/\nhttps://apple.com/iphone\nhttps://dedupekit.pages.dev/\nhttps://google.com/search\nhttps://github.com/features\nhttps://apple.com/iphone\nhttps://news.ycombinator.com`,
+      inventory: `SKU-8921-A\nSKU-1049-B\nsku-8921-a\nSKU-3321-C\nSKU-8921-A\nSKU-9900-X\nsku-1049-b\nSKU-5412-Z`
+    };
+
+    document.querySelectorAll('[data-sample]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.getAttribute('data-sample');
+        if (samplePresets[type]) {
+          inputText.value = samplePresets[type];
+          triggerDeduplication();
+          showToast(`Loaded ${type} sample`);
+        }
+      });
+    });
+
+    // Toast Helper
+    let toastTimeout = null;
+    function showToast(msg) {
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2200);
+    }
+
+    // Initial run with emails sample for immediate live demo
+    inputText.value = samplePresets.emails;
+    triggerDeduplication();
+  });
+</script>

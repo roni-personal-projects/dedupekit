@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Remove Duplicate Lines in Excel & Google Sheets | DeDupe Kit"
+  description="Safely remove duplicate lines from Excel and Google Sheets tables. Protect column tabs, deduplicate by single column, and prevent data corruption."
+  canonical="https://dedupekit.pages.dev/spreadsheet"
+  keywords="excel remove duplicate lines, remove duplicate lines, google sheets remove duplicates, duplicate line remover, remove duplicates, online duplicate line remover tool"
+>
+  <Header currentPath="/spreadsheet" />
+
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="py-16 sm:py-24 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[1000px] mx-auto px-4 sm:px-6 text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          Excel &amp; Google Sheets Guide
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-6">
+          Deduplicate spreadsheets without breaking columns.
+        </h1>
+        <p class="text-lg sm:text-xl text-[#7a7a7a] dark:text-[#a1a1a6] max-w-2xl mx-auto leading-relaxed">
+          When copying cells from Excel or Google Sheets, invisible tab characters (<code class="bg-[#f0f0f0] dark:bg-white/10 px-1.5 py-0.5 rounded text-xs text-[#1d1d1f] dark:text-[#f5f5f7] font-mono">\t</code>) separate each column. DeDupe Kit ensures they are never erased or replaced by spaces.
+        </p>
+        <div class="mt-8 flex items-center justify-center gap-4">
+          <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-colors shadow-xs">
+            Open Deduplication Tool
+          </a>
+          <a href="#workflow" class="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-[#f5f5f7] dark:bg-[#252528] text-[#1d1d1f] dark:text-[#f5f5f7] font-medium hover:bg-[#e0e0e0] dark:hover:bg-[#333336] transition-colors">
+            See the 3-Step Workflow &darr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Other Tools Break Spreadsheets -->
+    <section class="py-16 bg-[#fafafc] dark:bg-[#18181b] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="text-xs uppercase font-semibold text-red-600 dark:text-red-400 tracking-wider mb-2 block">The Problem</span>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">
+              Why legacy deduplicators ruin your spreadsheet data
+            </h2>
+            <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-4">
+              Many old online tools (including dedupelist.com) execute code like:
+            </p>
+            <div class="bg-[#1d1d1f] text-emerald-400 p-3 rounded-xl font-mono text-xs mb-4">
+              masterarray[i].replace(/\t/g, '    ');
+            </div>
+            <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+              By replacing tab characters with 4 spaces, the clipboard loses its cell-boundary information. When you paste the result back into Excel or Google Sheets, everything collapses into a single column with broken alignments.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-[#1c1c1e] p-6 rounded-2xl border border-[#e0e0e0] dark:border-white/10 shadow-sm transition-colors">
+            <h3 class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+              What happens on legacy tools:
+            </h3>
+            <div class="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl p-3 text-xs font-mono text-red-800 dark:text-red-300 space-y-1 mb-4">
+              <div>[A1: "John Doe    john@work.com    Manager"]</div>
+              <div>[A2: "Sarah Smith    sarah@work.com    Engineer"]</div>
+              <div class="text-[10px] text-red-600 dark:text-red-400 font-sans italic mt-1">&times; All columns collapsed into Column A!</div>
+            </div>
+
+            <h3 class="text-sm font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              With DeDupe Kit's Delimiter Guard:
+            </h3>
+            <div class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl p-3 text-xs font-mono text-emerald-800 dark:text-emerald-300 space-y-1">
+              <div>[A1: "John Doe"] [B1: "john@work.com"] [C1: "Manager"]</div>
+              <div>[A2: "Sarah Smith"] [B2: "sarah@work.com"] [C2: "Engineer"]</div>
+              <div class="text-[10px] text-emerald-700 dark:text-emerald-400 font-sans italic mt-1">&check; Perfect column boundaries preserved!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-Step Walkthrough Section -->
+    <section id="workflow" class="py-20 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <p class="text-xs uppercase font-semibold text-[#0066cc] dark:text-[#2997ff] tracking-wider mb-2">Step-by-Step</p>
+          <h2 class="text-3xl font-semibold tracking-[-0.025em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">
+            How to deduplicate spreadsheet data in 30 seconds
+          </h2>
+          <p class="text-[#7a7a7a] dark:text-[#a1a1a6]">Follow this frictionless workflow for guaranteed clean results.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-[#fafafc] dark:bg-[#1c1c1e] p-6 rounded-2xl border border-[#e0e0e0] dark:border-white/10 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-[#0066cc] text-white flex items-center justify-center font-semibold text-sm mb-4">1</div>
+            <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-2">Copy Cells</h3>
+            <p class="text-sm text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+              In Excel, Google Sheets, or Apple Numbers, highlight your target rows and press <kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-[#d2d2d7] dark:border-white/10 text-xs font-mono text-[#1d1d1f] dark:text-[#f5f5f7]">Ctrl+C</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-[#d2d2d7] dark:border-white/10 text-xs font-mono text-[#1d1d1f] dark:text-[#f5f5f7]">⌘+C</kbd>.
+            </p>
+          </div>
+
+          <div class="bg-[#fafafc] dark:bg-[#1c1c1e] p-6 rounded-2xl border border-[#e0e0e0] dark:border-white/10 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-[#0066cc] text-white flex items-center justify-center font-semibold text-sm mb-4">2</div>
+            <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-2">Paste &amp; Configure</h3>
+            <p class="text-sm text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+              Paste into DeDupe Kit (<kbd class="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-[#d2d2d7] dark:border-white/10 text-xs font-mono text-[#1d1d1f] dark:text-[#f5f5f7]">Ctrl+V</kbd>). Open "More Options" to deduplicate by entire row or by a specific column (e.g. Email).
+            </p>
+          </div>
+
+          <div class="bg-[#fafafc] dark:bg-[#1c1c1e] p-6 rounded-2xl border border-[#e0e0e0] dark:border-white/10 transition-colors">
+            <div class="w-8 h-8 rounded-full bg-[#0066cc] text-white flex items-center justify-center font-semibold text-sm mb-4">3</div>
+            <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-2">Paste Back</h3>
+            <p class="text-sm text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+              Click the <strong>Copy</strong> button and paste straight back into your sheet. All rows, columns, and data types snap back into their exact cells without formatting drift.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column-Level Deduplication Explanation -->
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#18181b] transition-colors">
+      <div class="max-w-[1000px] mx-auto px-4 sm:px-6">
+        <div class="bg-white dark:bg-[#1c1c1e] rounded-3xl p-8 sm:p-10 border border-[#e0e0e0] dark:border-white/10 shadow-sm transition-colors">
+          <div class="flex items-center gap-2 text-xs font-semibold text-[#0066cc] dark:text-[#2997ff] uppercase tracking-wider mb-2">
+            <span>Power Feature</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">
+            Column-Specific Deduplication
+          </h2>
+          <p class="text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-6">
+            Imagine you have a customer export with columns for <em>ID</em>, <em>Full Name</em>, <em>Email</em>, and <em>Sign-up Date</em>. If a customer changed their name or signed up on two different dates, their entire row isn't identical—but their Email is duplicate!
+          </p>
+          <p class="text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-6">
+            With DeDupe Kit, choose <strong>Tab Delimited</strong> and select <strong>By Col 3 (Email)</strong>. DeDupe Kit will inspect only the email column for duplicates while keeping the complete customer record intact in the output!
+          </p>
+
+          <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10 flex flex-wrap items-center justify-between gap-4">
+            <span class="text-sm text-[#1d1d1f] dark:text-[#f5f5f7] font-medium">Ready to try spreadsheet deduplication?</span>
+            <a href="/#tool" class="apple-btn-active px-6 py-2.5 rounded-full bg-[#0066cc] text-white text-xs font-semibold hover:bg-[#0071e3] transition-colors shadow-xs">
+              Open Studio Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

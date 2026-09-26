@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Terms & Conditions — DeDupe Kit"
+  description="Read the terms and conditions for using DeDupe Kit. Free, transparent, and client-side utility terms."
+  canonical="https://dedupekit.pages.dev/terms"
+>
+  <Header currentPath="/terms" />
+
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="py-16 sm:py-24 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[800px] mx-auto px-4 sm:px-6 text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0066cc]/10 text-[#0066cc] dark:text-[#2997ff] text-xs font-semibold uppercase tracking-wider mb-4">
+          Legal Agreement
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-6">
+          Terms &amp; Conditions
+        </h1>
+        <p class="text-base sm:text-lg text-[#7a7a7a] dark:text-[#a1a1a6] max-w-xl mx-auto leading-relaxed">
+          Last updated: September 2026. Please review these terms governing the use of DeDupe Kit.
+        </p>
+      </div>
+    </section>
+
+    <!-- Terms Document -->
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#18181b] transition-colors">
+      <div class="max-w-[800px] mx-auto px-4 sm:px-6 bg-white dark:bg-[#1c1c1e] rounded-3xl p-8 sm:p-12 border border-[#e0e0e0] dark:border-white/10 shadow-sm space-y-10 text-[#1d1d1f] dark:text-[#f5f5f7]">
+        
+        <div>
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">1. Acceptance of Terms</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            By accessing or using DeDupe Kit (accessible at <code class="font-mono text-xs bg-[#f5f5f7] dark:bg-white/10 px-1 py-0.5 rounded">dedupekit.pages.dev</code>), you agree to be bound by these Terms and Conditions. If you do not agree to these terms, you should discontinue use of the service.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">2. Description of Service</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-3">
+            DeDupe Kit is an open web utility intended to remove duplicate lines, filter text, and format lists. All software operations are executed locally within your web browser using client-side JavaScript and Web Workers.
+          </p>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            We provide this tool completely free of charge, with no subscription requirements, mandatory user registration, or paid tier barriers.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">3. Permitted and Lawful Use</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            You agree to use DeDupe Kit only for lawful purposes. You retain full ownership and intellectual rights to all text, data, and files you paste or process through the tool. Because DeDupe Kit executes locally on your device, we do not view, inspect, or retain custody of your inputs.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">4. Disclaimer of Warranties</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            DeDupe Kit is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. While we strive for absolute algorithmic precision and exhaustive testing, we do not warrant that the results will be error-free or that the utility will meet your specific business requirements. Users are advised to review critical datasets before using them in production systems.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">5. Limitation of Liability</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            To the maximum extent permitted by applicable law, DeDupe Kit and its maintainers shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, goodwill, or other intangible losses arising out of your access to or inability to use the service.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">6. Changes to These Terms</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            We reserve the right to revise or replace these terms at our sole discretion. Any changes will be posted on this page with an updated timestamp. Continued use of the website following changes signifies your agreement to the revised terms.
+          </p>
+        </div>
+
+        <div class="pt-6 border-t border-[#f0f0f0] dark:border-white/10 flex items-center justify-between text-xs text-[#7a7a7a] dark:text-[#a1a1a6]">
+          <span>Questions regarding terms?</span>
+          <a href="/contact" class="text-[#0066cc] dark:text-[#2997ff] hover:underline font-medium">Contact Us</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

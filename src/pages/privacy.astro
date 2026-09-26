@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Privacy Policy & Security Guarantee — DeDupe Kit"
+  description="DeDupe Kit is 100% private and client-side. Your lists and text never leave your device. Read our zero-knowledge architecture and security guarantee."
+  canonical="https://dedupekit.pages.dev/privacy"
+>
+  <Header currentPath="/privacy" />
+
+  <main class="flex-1">
+    <!-- Hero Section -->
+    <section class="py-16 sm:py-24 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 text-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          Privacy-First Architecture
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-6">
+          Your data is strictly yours. Zero uploads.
+        </h1>
+        <p class="text-lg sm:text-xl text-[#7a7a7a] dark:text-[#a1a1a6] max-w-2xl mx-auto leading-relaxed">
+          DeDupe Kit was intentionally designed with zero server-side storage, zero telemetry, and zero tracking.
+        </p>
+      </div>
+    </section>
+
+    <!-- Detailed Privacy & Security Document -->
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#18181b] transition-colors">
+      <div class="max-w-[800px] mx-auto px-4 sm:px-6 bg-white dark:bg-[#1c1c1e] rounded-3xl p-8 sm:p-12 border border-[#e0e0e0] dark:border-white/10 shadow-sm space-y-10 text-[#1d1d1f] dark:text-[#f5f5f7]">
+        
+        <div>
+          <h2 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">1. Local In-Browser Processing</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-3">
+            Every text operation—including line splitting, regex filtering, case normalization, deduplication, and sorting—occurs exclusively inside your web browser's temporary execution thread.
+          </p>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            When you paste content into the input box or drag a file into the studio, the data is held only in your browser's local RAM. As soon as you close or refresh the tab, the memory is instantly freed and cleared by your browser's garbage collector.
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">2. Zero Server Transmission</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-3">
+            DeDupe Kit does not make <code class="font-mono text-xs bg-[#f5f5f7] dark:bg-white/10 px-1 py-0.5 rounded">POST</code>, <code class="font-mono text-xs bg-[#f5f5f7] dark:bg-white/10 px-1 py-0.5 rounded">PUT</code>, or API calls to any backend server with your content.
+          </p>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            You can verify this yourself by opening your browser's Developer Tools (press <kbd class="px-1.5 py-0.5 rounded bg-[#f0f0f0] dark:bg-white/10 border border-[#d2d2d7] dark:border-white/10 text-xs font-mono">F12</kbd>), navigating to the <strong>Network</strong> tab, pasting a list, and watching the network log. You will observe exactly zero requests being dispatched.
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">3. No Advertising, Analytics or Cookies</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            We do not use advertising networks (such as Google AdSense), behavioral trackers, session recording software (such as Hotjar or FullStory), or third-party marketing cookies. There are no tracking beacons, pixels, or profiling scripts embedded anywhere on <span class="font-medium text-[#1d1d1f] dark:text-[#f5f5f7]">dedupekit.pages.dev</span>.
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">4. Enterprise &amp; GDPR / CCPA Safe</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed mb-3">
+            Because DeDupe Kit never collects, stores, or processes personal data on any server infrastructure, using DeDupe Kit to clean customer lists, email addresses, database records, or internal identifiers does not constitute a data transfer under GDPR, CCPA, or HIPAA.
+          </p>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            Your proprietary files and confidential records never leave your company's network or local machine.
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-[#f0f0f0] dark:border-white/10">
+          <h2 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">5. Offline Capability</h2>
+          <p class="text-sm sm:text-base text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            DeDupe Kit is fully functional in offline environments. Once loaded, you can disconnect your device from the internet or enable Airplane Mode to guarantee complete isolation while cleaning sensitive lists.
+          </p>
+        </div>
+
+        <div class="pt-8 border-t border-[#f0f0f0] dark:border-white/10 text-center">
+          <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-all shadow-md">
+            Launch Secure Tool
+          </a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

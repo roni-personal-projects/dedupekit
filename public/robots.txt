@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dedupekit.pages.dev/sitemap.xml

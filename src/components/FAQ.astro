@@ -1,0 +1,130 @@
+---
+// FAQ.astro — SEO-Friendly FAQ Section with Schema.org FAQPage JSON-LD
+// Targeted for queries: "How can I remove duplicates?", "How to get rid of duplicate lines?",
+// "How to find duplicates online?", "Which tools remove duplicates?", "What is the best free duplicate finder?",
+// "Which method removes duplicates automatically?", "How to remove duplicates but keep one?", and related terms.
+
+const faqs = [
+  {
+    q: "How can I remove duplicates?",
+    a: "To remove duplicates, copy and paste your text or list into DeDupe Kit's input area. The tool automatically analyzes each line using fast hash indexing, detects identical entries, and immediately outputs a clean list of unique lines in the output panel. You can then copy the unique list to your clipboard or download it as a .txt file with a single click."
+  },
+  {
+    q: "How to get rid of duplicate lines?",
+    a: "You can get rid of duplicate lines in three simple steps: 1) Paste your list of lines into the DeDupe Kit input box; 2) Select your matching preferences, such as trimming outer whitespace, removing blank lines, or choosing case-sensitive matching; 3) DeDupe Kit automatically discards every redundant entry and leaves only one pristine instance of each line."
+  },
+  {
+    q: "How to find duplicates online?",
+    a: "To find duplicates online without installing software, open DeDupe Kit in your web browser. Under 'More Options', change the Output Filter to 'Show Duplicates Only (Audit Mode)'. The tool will scan your list, suppress unique lines, and display only the repeated lines along with their exact recurrence frequencies."
+  },
+  {
+    q: "Which tools remove duplicates?",
+    a: "Several tools remove duplicates: 1) Online tools like DeDupe Kit (instant, privacy-first, client-side in browser); 2) Spreadsheet software like Microsoft Excel ('Remove Duplicates' dialog) and Google Sheets ('Data > Data cleanup > Remove duplicates'); 3) Command-line utilities like Unix 'sort -u' or 'awk'; and 4) Code editors like VS Code and Notepad++ using deduplication plugins. DeDupe Kit is purpose-built to combine the simplicity of online tools with 100% private in-browser security and spreadsheet tab protection."
+  },
+  {
+    q: "What is the best free duplicate finder?",
+    a: "DeDupe Kit is widely recognized as the best free duplicate finder for text lists, datasets, and spreadsheets. Unlike older utilities that upload your data to remote servers or plaster your screen with ads, DeDupe Kit runs 100% client-side in your local browser memory, handles 100,000+ lines in milliseconds via Web Workers, preserves Excel column tabs, and never stores or logs your sensitive data."
+  },
+  {
+    q: "Which method removes duplicates automatically?",
+    a: "An automated in-browser deduplication tool like DeDupe Kit is the fastest method to remove duplicates automatically. With 'Live Auto-Dedupe' enabled, the engine calculates unique entries in real time as you paste or type, immediately updating line counts and generating clean results without requiring you to write complex formulas or run terminal scripts."
+  },
+  {
+    q: "How to remove duplicates but keep one?",
+    a: "DeDupe Kit removes duplicates but keeps the first occurrence of each unique line by default. It maintains the chronological sequence of your initial list while filtering out subsequent repeated entries. When case-insensitive matching is enabled, it even preserves the original letter casing of the first entry instead of forcefully lowercasing your whole text."
+  },
+  {
+    q: "How to remove duplicate rows from Excel and Google Sheets without breaking columns?",
+    a: "Copy your rows or columns directly from Excel or Google Sheets (Ctrl+C / ⌘+C) and paste them into DeDupe Kit (Ctrl+V / ⌘+V). DeDupe Kit has an automatic Tab-Delimiter Guard that preserves invisible tab characters (\\t). It cleans duplicate rows without converting tabs into spaces, so you can paste the unique rows directly back into your spreadsheet with every column intact."
+  },
+  {
+    q: "Is my data private when I remove duplicates online?",
+    a: "With DeDupe Kit, your data is 100% private. All processing occurs locally within your web browser's RAM via a background Web Worker. Your text is never transmitted over the internet, uploaded to a remote server, or stored in a database. You can even use DeDupe Kit offline or in Airplane Mode."
+  },
+  {
+    q: "How does case-sensitive vs. case-insensitive duplicate removal work?",
+    a: "In case-sensitive mode, 'Example' and 'example' are treated as two distinct unique entries. In case-insensitive mode, 'Example' and 'example' are recognized as identical duplicates; DeDupe Kit keeps the first occurrence and preserves its exact casing while discarding the redundant variation."
+  },
+  {
+    q: "Can I sort the unique list after removing duplicates?",
+    a: "Yes. DeDupe Kit includes a comprehensive sorting suite. You can choose to preserve the original line order, sort alphabetically (A to Z or Z to A), apply Natural Alphanumeric Sort (which correctly places 'Item 2' before 'Item 10'), sort by line length, or reverse your unique list."
+  },
+  {
+    q: "Is there a limit on how many lines I can deduplicate?",
+    a: "There is no artificial limit. Because DeDupe Kit utilizes asynchronous Web Workers and linear-time O(n) hash indexing, modern browsers can deduplicate lists containing 100,000 to 200,000+ lines in well under a second without freezing or lagging your user interface."
+  }
+];
+
+// Schema.org FAQPage Structured Data
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": `<p>${faq.a}</p>`
+    }
+  }))
+};
+---
+
+<section id="faq" class="py-20 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+  <div class="max-w-[860px] mx-auto px-4 sm:px-6">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0066cc]/10 dark:bg-[#0066cc]/20 text-[#0066cc] dark:text-[#2997ff] text-xs font-semibold uppercase tracking-wider mb-4">
+        Frequently Asked Questions
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-semibold tracking-[-0.025em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-4">
+        Got Questions? Everything You Need to Know
+      </h2>
+      <p class="text-base sm:text-lg text-[#7a7a7a] dark:text-[#a1a1a6]">
+        Common answers on how to remove duplicates, privacy security, spreadsheet compatibility, and tool features.
+      </p>
+    </div>
+
+    <!-- Accordion List -->
+    <div class="divide-y divide-[#e0e0e0] dark:divide-white/10 border-y border-[#e0e0e0] dark:border-white/10">
+      {faqs.map((faq) => (
+        <details class="group py-5 cursor-pointer">
+          <summary class="flex items-center justify-between font-medium text-[#1d1d1f] dark:text-[#f5f5f7] text-base sm:text-lg list-none select-none hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors">
+            <span class="pr-4">{faq.q}</span>
+            <span class="w-6 h-6 rounded-full bg-[#f0f0f0] dark:bg-white/10 flex items-center justify-center shrink-0 ml-2 group-open:rotate-180 transition-transform text-[#7a7a7a] dark:text-[#a1a1a6]">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-3 pr-10 text-sm sm:text-[15px] text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Quick Help Card -->
+    <div class="mt-12 p-6 rounded-2xl bg-[#fafafc] dark:bg-[#1c1c1e] border border-[#e0e0e0] dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
+      <div class="text-center sm:text-left">
+        <h4 class="font-semibold text-sm text-[#1d1d1f] dark:text-[#f5f5f7]">Still have a specific question or custom requirement?</h4>
+        <p class="text-xs text-[#7a7a7a] dark:text-[#a1a1a6] mt-0.5">
+          Visit our detailed Help Center or reach out directly with feature suggestions.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="/faq" class="px-4 py-2 rounded-full bg-white dark:bg-[#2c2c2e] border border-[#e0e0e0] dark:border-white/10 text-xs font-medium text-[#1d1d1f] dark:text-[#f5f5f7] hover:border-[#0066cc] transition-colors">
+          View All Topics &rarr;
+        </a>
+        <a href="#tool" class="apple-btn-active px-4 py-2 rounded-full bg-[#0066cc] text-xs font-medium text-white hover:bg-[#0071e3] transition-all">
+          Open Studio
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JSON-LD FAQPage Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

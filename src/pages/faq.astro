@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const categories = [
+  {
+    category: "Core Duplicate Removal FAQs",
+    items: [
+      {
+        q: "How can I remove duplicates?",
+        a: "To remove duplicates, paste your text or list into DeDupe Kit's input area. The tool automatically analyzes each line using fast hash indexing, detects identical occurrences, and immediately outputs a clean list of unique lines in the output panel. You can then copy the unique results to your clipboard or download them as a .txt file with one click."
+      },
+      {
+        q: "How to get rid of duplicate lines?",
+        a: "You can get rid of duplicate lines in three simple steps: 1) Paste your list of lines into the DeDupe Kit input box; 2) Select your matching preferences, such as trimming outer whitespace or choosing case-sensitive matching; 3) DeDupe Kit automatically discards every redundant entry and leaves only one pristine instance of each line."
+      },
+      {
+        q: "How to find duplicates online?",
+        a: "To find duplicates online without installing software, open DeDupe Kit in your web browser. Under 'More Options', change the Output Filter to 'Show Duplicates Only (Audit Mode)'. The tool will scan your list, suppress unique lines, and display only the repeated lines along with their exact recurrence frequencies."
+      },
+      {
+        q: "Which tools remove duplicates?",
+        a: "Popular tools to remove duplicates include: 1) Online tools like DeDupe Kit (instant, privacy-first, client-side in browser); 2) Spreadsheet software like Microsoft Excel ('Remove Duplicates' button) and Google Sheets ('Data > Data cleanup > Remove duplicates'); 3) Command line utilities like Unix 'sort -u' or 'awk'; and 4) Text editors like Notepad++ and VS Code with deduplication extensions. DeDupe Kit combines the simplicity of online tools with 100% private in-browser security."
+      },
+      {
+        q: "What is the best free duplicate finder?",
+        a: "DeDupe Kit is widely considered the best free duplicate finder for text, lists, and spreadsheets. Unlike older utilities that upload your data to remote servers or plaster your screen with ads, DeDupe Kit runs 100% client-side in your local browser memory, handles 100,000+ lines in milliseconds via Web Workers, preserves Excel column tabs, and never stores or logs your sensitive data."
+      },
+      {
+        q: "Which method removes duplicates automatically?",
+        a: "An automated in-browser deduplication tool like DeDupe Kit is the fastest method to remove duplicates automatically. With 'Live Auto-Dedupe' enabled, the engine calculates unique entries in real time as you paste or type, immediately updating line counts and generating clean results without requiring you to write complex formulas or run terminal scripts."
+      },
+      {
+        q: "How to remove duplicates but keep one?",
+        a: "DeDupe Kit removes duplicates but keeps the first occurrence of each unique line by default. It maintains the chronological sequence of your initial list while filtering out subsequent repeated entries. When case-insensitive matching is enabled, it even preserves the original letter casing of the first entry instead of lowercasing your whole text."
+      }
+    ]
+  },
+  {
+    category: "General & Getting Started",
+    items: [
+      {
+        q: "What is DeDupe Kit?",
+        a: "DeDupe Kit is a free, fast, privacy-first web utility that removes duplicate lines from any text list, spreadsheet extract, or code file directly inside your browser."
+      },
+      {
+        q: "Do I need to install software or register an account?",
+        a: "No. DeDupe Kit runs 100% in your browser without accounts, downloads, or subscription fees. It's completely free forever."
+      },
+      {
+        q: "Can I use DeDupe Kit offline?",
+        a: "Yes. Once the page loads, all code, styles, and deduplication Web Workers are stored in your browser's local memory. You can disconnect from Wi-Fi or turn on Airplane Mode and continue deduplicating lists."
+      }
+    ]
+  },
+  {
+    category: "Privacy & Data Security",
+    items: [
+      {
+        q: "Does DeDupe Kit upload or log my text?",
+        a: "Never. All parsing, hashing, filtering, and sorting happens strictly on your local computer via client-side JavaScript. No text is ever uploaded to any server, database, or analytics endpoint."
+      },
+      {
+        q: "Are there third-party ad networks or tracking scripts?",
+        a: "No. Unlike legacy sites that load ad trackers and Google AdSense beacons, DeDupe Kit contains zero ads, zero trackers, and zero cross-site cookies."
+      }
+    ]
+  },
+  {
+    category: "Excel & Spreadsheet Workflows",
+    items: [
+      {
+        q: "How does DeDupe Kit prevent spreadsheet columns from breaking?",
+        a: "When you copy rows in Excel or Google Sheets, the columns are separated by hidden tab characters (\\t). DeDupe Kit preserves these tab boundaries verbatim so you can paste the cleaned list directly back into your sheet without misaligned cells."
+      },
+      {
+        q: "Can I deduplicate based on a single column in a multi-column table?",
+        a: "Yes. Open 'More Options' in the studio, choose 'Tab Delimited', and select which column index (e.g. By Col 2) to evaluate for duplicates. DeDupe Kit will evaluate duplicates based on that specific column while retaining the full multi-column row in the output."
+      }
+    ]
+  },
+  {
+    category: "Matching, Sorting & Options",
+    items: [
+      {
+        q: "What does 'Preserve Original Casing' mean?",
+        a: "If you enable Case-Insensitive matching, other tools force all your output into lowercase. DeDupe Kit treats 'John@Example.com' and 'john@example.com' as duplicates, but keeps the original capitalization of the first occurrence."
+      },
+      {
+        q: "What is Natural Sort?",
+        a: "Standard alphabetical sorting sorts numbers character-by-character, putting 'Item 10' before 'Item 2'. Natural Sort understands human numerical ordering, placing 'Item 2' before 'Item 10'."
+      },
+      {
+        q: "Can I extract only the duplicate lines for an audit?",
+        a: "Yes! Select 'Show Duplicates Only (Audit Mode)' from the Output Filter dropdown in More Options. This displays only the lines that appeared two or more times."
+      }
+    ]
+  },
+  {
+    category: "Performance & Shortcuts",
+    items: [
+      {
+        q: "What is the maximum list size DeDupe Kit can handle?",
+        a: "DeDupe Kit easily handles lists of 50,000 to 200,000+ lines in seconds. We use background Web Workers so your browser stays fluid and responsive without freezing."
+      },
+      {
+        q: "Are there keyboard shortcuts?",
+        a: "Yes. Press Ctrl+Enter (or ⌘+Enter on Mac) to run deduplication instantly. In the input box, standard shortcuts like Ctrl+A, Ctrl+V, and Ctrl+Z work seamlessly."
+      }
+    ]
+  }
+];
+
+const allFaqItems = categories.flatMap(c => c.items);
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": allFaqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": `<p>${item.a}</p>`
+    }
+  }))
+};
+---
+
+<Layout
+  title="FAQ & Help Center — Online Duplicate Line Remover Tool | DeDupe Kit"
+  description="Frequently asked questions about removing duplicate lines, privacy safeguards, Excel TSV formatting, browser worker limits, and sorting algorithms."
+  canonical="https://dedupekit.pages.dev/faq"
+  keywords="remove duplicates, duplicate line remover tool, online duplicate line remover, remove duplicate lines, find duplicate lines, delete duplicate lines"
+>
+  <Header currentPath="/faq" />
+
+  <main class="flex-1">
+    <!-- Hero Banner -->
+    <section class="py-16 sm:py-24 bg-white dark:bg-[#121214] border-b border-[#e0e0e0] dark:border-white/10 transition-colors">
+      <div class="max-w-[1000px] mx-auto px-4 sm:px-6 text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0066cc]/10 dark:bg-[#0066cc]/20 text-[#0066cc] dark:text-[#2997ff] text-xs font-semibold uppercase tracking-wider mb-4">
+          Help Center
+        </span>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.03em] text-[#1d1d1f] dark:text-[#f5f5f7] mb-6">
+          Frequently Asked Questions
+        </h1>
+        <p class="text-lg sm:text-xl text-[#7a7a7a] dark:text-[#a1a1a6] max-w-2xl mx-auto leading-relaxed">
+          Everything you need to know about using DeDupe Kit, local data processing, formatting rules, and spreadsheet compatibility.
+        </p>
+        <div class="mt-8">
+          <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-colors shadow-xs">
+            Open Deduplication Tool
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordions by Category -->
+    <section class="py-16 bg-[#f5f5f7] dark:bg-[#18181b] transition-colors">
+      <div class="max-w-[900px] mx-auto px-4 sm:px-6 space-y-12">
+        {categories.map((cat) => (
+          <div class="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 sm:p-8 border border-[#e0e0e0] dark:border-white/10 shadow-sm transition-colors">
+            <h2 class="text-xl sm:text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-6 pb-3 border-b border-[#f0f0f0] dark:border-white/10">
+              {cat.category}
+            </h2>
+            <div class="divide-y divide-[#e0e0e0] dark:divide-white/10">
+              {cat.items.map((item) => (
+                <details class="group py-4 cursor-pointer">
+                  <summary class="flex items-center justify-between font-medium text-[#1d1d1f] dark:text-[#f5f5f7] text-base list-none select-none hover:text-[#0066cc] dark:hover:text-[#2997ff] transition-colors">
+                    <span>{item.q}</span>
+                    <span class="w-6 h-6 rounded-full bg-[#f0f0f0] dark:bg-white/10 flex items-center justify-center shrink-0 ml-4 group-open:rotate-180 transition-transform text-[#7a7a7a] dark:text-[#a1a1a6]">
+                      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="mt-3 pr-8 text-sm text-[#7a7a7a] dark:text-[#a1a1a6] leading-relaxed">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Bottom Help CTA -->
+    <section class="py-16 bg-white dark:bg-[#121214] border-t border-[#e0e0e0] dark:border-white/10 text-center transition-colors">
+      <div class="max-w-xl mx-auto px-4 sm:px-6">
+        <h3 class="text-2xl font-semibold text-[#1d1d1f] dark:text-[#f5f5f7] mb-3">Have a large list to clean right now?</h3>
+        <p class="text-[#7a7a7a] dark:text-[#a1a1a6] mb-6 text-sm sm:text-base">
+          Paste your text or drop your file into the studio and get instant unique results.
+        </p>
+        <a href="/#tool" class="apple-btn-active inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#0066cc] text-white font-medium hover:bg-[#0071e3] transition-all shadow-md">
+          Launch DeDupe Kit
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- JSON-LD FAQPage Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <Footer />
+</Layout>
